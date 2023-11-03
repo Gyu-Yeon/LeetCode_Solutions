@@ -1,31 +1,22 @@
-let isValid = function(s) {
-    if (s.length < 2) {
-        return false
-    }
-    let stack = [];
-    for(let i = 0; i < s.length; i++) {
-        if (s[i] === "(") {
-            stack.push(s[i]);
-        } else if (s[i] === ")") {
-            if (stack.length > 0 && stack[stack.length-1] === "(") {
-                stack.pop();
-            } else return false            
-        } else if (s[i] === "{") {
-            stack.push(s[i]);
-        } else if (s[i] === "}") {
-            if (stack.length > 0 && stack[stack.length-1] === "{") {
-                stack.pop();
-            } else return false
-        } else if (s[i] === "[") {
-            stack.push(s[i]);
-        } else if (s[i] === "]") {
-             if (stack.length > 0 && stack[stack.length-1] === "[") {
-                stack.pop();
-            } else return false 
+/**
+ * @param {string} s
+ * @return {boolean}
+ */
+var isValid = function(s) {
+    let arr = [];
+    for (let i = 0; i < s.length; i++) {
+        if (s[i] === "(" || s[i] === "{" || s[i] === "[" ){
+            arr.push(s[i]);
+        } else if (s[i] === ")" && arr.pop() !== "("){            
+            return false;
+        } else if (s[i] === "}" && arr.pop() !== "{"){
+            return false;
+        } else if (s[i] === "]" && arr.pop() !== "["){
+            return false;
         }
-        console.log(stack)
     }
-    if (stack.length < 1) {
-        return true
-    } else return false
+    if (arr.length === 0) {
+        return true;
+    } else return false;            
+         
 };

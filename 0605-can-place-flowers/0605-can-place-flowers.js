@@ -3,23 +3,22 @@
  * @param {number} n
  * @return {boolean}
  */
-
-//find 3 0s in a row
 var canPlaceFlowers = function(flowerbed, n) {
-  flowerbed.unshift(0);
-    flowerbed.push(0);
-    for (let i = 1; i < flowerbed.length-1; i++) {
-        if (flowerbed[i-1] + flowerbed[i] + flowerbed[i+1] === 0) {
-            flowerbed[i] = 1;
-            if (n > 0) {
-                n--
-            } else {
-                break;
+    for (let i = 0; i < flowerbed.length; i++) {
+        if (n < 0) return;
+        if (flowerbed[i] === 0) {
+            if (!flowerbed[i-1] && !flowerbed[i+1]) {
+                flowerbed[i] = 1;
+                n--;
             }
         }
     }
-    if (!n) {
+    if (n !== 0) {
+        return false;
+    } else {
         return true;
     }
-    return false
+    console.log(flowerbed)
 };
+
+// loop를 돌려 i 자리가 0이라면 앞 뒤를 확인 한 후에 모두 0이면 i자리를 1로 수정 후 n-1 시행을 반복.

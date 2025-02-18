@@ -3,21 +3,34 @@
  * @return {string}
  */
 var reverseVowels = function(s) {
-    let vowels = [];
-    for (let i = 0; i < s.length; i++) {
-        if (s[i] === "a" || s[i] === "A" || s[i] === "e" || s[i] === "E" || s[i] === "i" || s[i] === "I" || s[i] === "o" || s[i] === "O" || s[i] === "u" || s[i] === "U") {
-            vowels.push(s[i]);
-        } 
+    
+    const verifyVowel = (char) => {
+        let vowels = ["a", "e", "i", "o", "u", "A", "E", "I", "O", "U"];
+        return vowels.includes(char);       
     }
-   
-    const converted = vowels.reverse();
-    let string = s.split("");
-    let counter = 0;
-    for (let i = 0; i< string.length; i++) {
-        if (string[i] === "a" || string[i] === "A" || string[i] === "e" || string[i] === "E" || string[i] === "i" || string[i] === "I" || string[i] === "o" || string[i] === "O" || string[i] === "u" || string[i] === "U") {
-            string[i] = converted[counter];
-            counter++;
+
+    const findVowelIndex = (s) => {
+        let arr = [];
+        let items = [];
+        for (let i = 0; i < s.length; i++) {
+            if (verifyVowel(s[i])) {
+                arr.push(i);
+                items.push(s[i]);
+            }
         }
+        return [arr, items];
     }
-    return string.join("")
+    const [spot, vowels] = findVowelIndex(s);
+    const reversedVowels = vowels.reverse();
+    
+
+    const fillReversedVowelsToOriginString = (s, spot, vowels) => {
+        let ans = s.split("");
+        for (let i = 0; i < spot.length; i++) {
+            // cloneS[spot[i]] = vowels[i];
+            ans[spot[i]] = vowels[i];
+        }
+        return ans.join("");
+    }
+    return fillReversedVowelsToOriginString(s, spot, reversedVowels);
 };

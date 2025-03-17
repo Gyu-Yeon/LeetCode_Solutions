@@ -13,14 +13,14 @@ var uniqueOccurrences = function(arr) {
         }
     }
     console.log(obj);
-    let aa = Object.values(obj);
-    let a = aa[0];
-    for (let i = 1; i < aa.length; i++) {
-        const key = aa[i];
-        if (a === key) {
-            return false;
+    let ans = Object.values(obj);
+    let obj2 = {};
+    for (let i = 0; i < ans.length; i++) {
+        const item2 = ans[i];
+        if (!obj2[item2]) {
+            obj2[item2] = 1 ; 
         } else {
-            a = key;
+            return false;
         }
     }
     return true;
